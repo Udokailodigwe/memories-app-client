@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
-import { createPosts } from '../../actions/posts';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPosts, updatePost } from '../../actions/posts';
 
 import useStyles from './styles';
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
     /*create state for every textinput field.*/
     const [postData, setPostData] = useState({
         creator: '',
@@ -14,24 +14,42 @@ const Form = () => {
         tags: '',
         selectedFile: ''
     })
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const handleSubmit = ((e) => {
+    useEffect(() => {
+        if (post) setPostData(post);
+    }, [post])
+
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        dispatch(createPosts(postData));
-    });
+        if (currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+            dispatch(createPosts(postData));
+        }
+        clear();
+    };
 
     const clear = (() => {
-
+        setCurrentId(null);
+        setPostData({
+            creator: '',
+            title: '',
+            message: '',
+            tags: '',
+            selectedFile: ''
+        })
     });
 
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">Share your Pets memories</Typography>
+                <Typography variant="h6">{currentId ? 'Edit' : 'Share'} your Pets memories</Typography>
                 <TextField
                     name="creator"
                     variant="outlined"
