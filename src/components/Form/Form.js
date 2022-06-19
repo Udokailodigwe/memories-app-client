@@ -6,6 +6,10 @@ import { createPosts, updatePost } from '../../actions/posts';
 
 import useStyles from './styles';
 const Form = ({ currentId, setCurrentId }) => {
+
+    const classes = useStyles();
+    const dispatch = useDispatch();
+
     /*create state for every textinput field.*/
     const [postData, setPostData] = useState({
         creator: '',
@@ -14,10 +18,9 @@ const Form = ({ currentId, setCurrentId }) => {
         tags: '',
         selectedFile: ''
     })
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
 
-    const classes = useStyles();
-    const dispatch = useDispatch();
+    /*get currentId for a single post*/
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -84,7 +87,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     fullWidth
                     value={postData.tags}
                     /*method for updating the state that uses an object*/
-                    onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+                    onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
                 />
                 <div className={classes.fileInput}>
                     <FileBase
