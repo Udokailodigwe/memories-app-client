@@ -10,14 +10,16 @@ import useStyles from './styles'
 
 
 const App = () => {
-    const [currentId, setCurrentId] = useState(null);
-    const classes = useStyles();
     const dispatch = useDispatch();
+    const [currentId, setCurrentId] = useState(null);
+    // const [data, setData] = useState(dispatch(getPosts));
+    const classes = useStyles();
+
+    let response = dispatch(getPosts());
 
     useEffect(() => {
-        dispatch(getPosts);
-    }, [dispatch]);
-
+        response.then((data) => data);
+    }, [response]);
 
     return (
         <Container maxWidth="lg">
