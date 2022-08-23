@@ -1,7 +1,6 @@
 # memories-app-client
 
-This application provide pet lovers opportunity to upload, share and store their memories with their pets.
-
+This application provide opportunity for people to upload and share memories of themselves.
 
 ## User Story
 </br>
