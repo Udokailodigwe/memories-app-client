@@ -8,7 +8,7 @@ As a user i want to have the opportunity to share and save  memories of me and m
 
 
 ## Hosted via Netlify.
-https://memory-site.netlify.app/
+https://memoryapplication.netlify.app/
 
 ## Key Features
 </br>
