@@ -1,11 +1,11 @@
-# pet-memories-app-client
+# memories-app-client
 
 This application provide pet lovers opportunity to upload, share and store their memories with their pets.
 
 
 ## User Story
 </br>
-As a user i want to have the opportunity to share and save the memories of me and my pet online. I also want to have the ability to update or delete such saved memories from an app.
+As a user i want to have the opportunity to share and save  memories of me and my loved ones online. I also want to have the ability to update or delete such saved memories from an app.
 
 
 ## Hosted via Netlify.
